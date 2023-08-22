@@ -18,7 +18,7 @@ const DatosAPI = () => {
             method: 'GET'
         })
         .then((response) => response.json())
-        .then((post) => console.log(post.slice(0, 3)))  
+        .then((post) => console.log(post.slice(0, 3)))
         .catch((error) => console.error(error))
 }
 
@@ -38,7 +38,7 @@ const enviarDatos = (nuevoPost) => {
         {
             method: 'POST',
             body: JSON.stringify(nuevoPost),
-            headers:{
+            headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
@@ -48,10 +48,33 @@ const enviarDatos = (nuevoPost) => {
 }
 
 
-boton2.addEventListener('click', () =>  {
+boton2.addEventListener('click', () => {
     const nuevoPost = {
         title: 'Título',
         body: 'Cuerpo del post, oaa'
     }
-    enviarDatos(nuevoPost); 
+    enviarDatos(nuevoPost);
+})
+
+
+//Descargar la imagen
+
+const renderImagen = (url) => `
+<img src=${url}>
+`;
+
+const ImagenAPI = () => {
+    fetch(CORS_ANYWHERE + URL_API_VIA_PLACEHOLDER,
+        {
+            method: 'GET'
+        })
+        .then((response) => response.blob())
+        .then((image) => {
+            const urlObjeto = URL.createObjectURL(image);
+            imgCont.innerHTML = ImagenAPI(urlObjeto)
+        })
+        .catch((error) => console.error(error))
+}
+boton3.addEventListener('click', () => {
+    ImagenAPI();
 })
