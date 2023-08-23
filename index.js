@@ -71,7 +71,7 @@ const ImagenAPI = () => {
         .then((response) => response.blob())
         .then((image) => {
             const urlObjeto = URL.createObjectURL(image);
-            imgCont.innerHTML = ImagenAPI(urlObjeto)
+            imgCont.innerHTML = renderImagen(urlObjeto)
         })
         .catch((error) => console.error(error))
 }
